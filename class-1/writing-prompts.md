@@ -24,7 +24,7 @@ API = application programming interface. APIs are the way an application interac
 
 Write about two kinds of HTTP requests you make in your daily life.
 
-1. Yelp Requests 2. Google Map requests 
+1. post 2. put 
 
 
 Why do some URLs have ?s and &s in them?
