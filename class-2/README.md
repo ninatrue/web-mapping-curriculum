@@ -22,12 +22,22 @@ Slippy maps make it easier to scroll around a location to see just what is outsi
 Leaflet is a JavaScript library used to build interactive maps.
 
 5. How has web map rendering changed over the years?
+
 6. What is the basemap-overlay paradigm and how are GL maps different?
 
 Exercises to do on your own:
 
 1. Keep learning! Try one more of the Web apps tutorials on the [Mapbox help page](https://docs.mapbox.com/help/tutorials/#web-apps) and submit your completed tutorial to your GitHub project.
+
+Submitted under projects 
+
 2. Head to the [Mapbox GL JS examples page](https://docs.mapbox.com/mapbox-gl-js/examples/) and pick two examples under the user interactions section. What kind of interactions do you see? Why might you use each of those interactions?
+
+1. "Create draggable Marker" - user can drag a marker and get coordinates. Users might find this helpful when looking at a map of green space, wild lands, trails, natioanl parks, etc. where there are no addresss. 
+
+2. "Filter symbols by text input" user can type in a feature class and only symbols of that feature class will be displayed. This is helpful if a user is looking for a certain type of attraction with a city. They can search "coffee shops" and the map will filter out everything but "coffee shops". 
+
+
 3. If you didn’t finish the “code together” exercise, please do so before next week.
 
 
