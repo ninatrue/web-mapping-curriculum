@@ -14,7 +14,13 @@ For your class journal:
 Slippy maps make it easier to scroll around a location to see just what is outside of the viewer without loading a whole new page. This is made possible with map tiles. In slippy maps, only the tiles that are on your screen are loaded (and some right outside the screen for faster scrolling around). 
 
 3. Why would you want to install a dedicated text editor?
+
+
+
 4. What is Leaflet?
+
+Leaflet is a JavaScript library used to build interactive maps.
+
 5. How has web map rendering changed over the years?
 6. What is the basemap-overlay paradigm and how are GL maps different?
 
