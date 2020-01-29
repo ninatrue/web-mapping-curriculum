@@ -7,7 +7,12 @@ __Homework__
 For your class journal:
 
 1. What is the difference between raster and vector data?
+
+
 2. Why do "slippy maps" exist?
+
+Slippy maps make it easier to scroll around a location to see just what is outside of the viewer without loading a whole new page. This is made possible with map tiles. In slippy maps, only the tiles that are on your screen are loaded (and some right outside the screen for faster scrolling around). 
+
 3. Why would you want to install a dedicated text editor?
 4. What is Leaflet?
 5. How has web map rendering changed over the years?
