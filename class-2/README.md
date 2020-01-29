@@ -33,9 +33,9 @@ Submitted under projects
 
 2. Head to the [Mapbox GL JS examples page](https://docs.mapbox.com/mapbox-gl-js/examples/) and pick two examples under the user interactions section. What kind of interactions do you see? Why might you use each of those interactions?
 
-1. "Create draggable Marker" - user can drag a marker and get coordinates. Users might find this helpful when looking at a map of green space, wild lands, trails, natioanl parks, etc. where there are no addresss. 
+ a)"Create draggable Marker" - user can drag a marker and get coordinates. Users might find this helpful when looking at a map of green space, wild lands, trails, natioanl parks, etc. where there are no addresss. 
 
-2. "Filter symbols by text input" user can type in a feature class and only symbols of that feature class will be displayed. This is helpful if a user is looking for a certain type of attraction with a city. They can search "coffee shops" and the map will filter out everything but "coffee shops". 
+b) "Filter symbols by text input" user can type in a feature class and only symbols of that feature class will be displayed. This is helpful if a user is looking for a certain type of attraction with a city. They can search "coffee shops" and the map will filter out everything but "coffee shops". 
 
 
 3. If you didn’t finish the “code together” exercise, please do so before next week.
