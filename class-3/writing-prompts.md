@@ -19,5 +19,9 @@ Intro to events
 
 What is an event?
 
+Events happen as a response to a user's actions. An event is an object that contains specific information about what just happened. 
 
 Describe an example of how you could use an event listener with an interactive map.
+
+You could use an event listening to wait for the user to click something and then have informtion pop up about the thing they clicked on. 
+
