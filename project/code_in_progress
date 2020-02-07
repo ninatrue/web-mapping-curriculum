@@ -56,10 +56,35 @@
       zoom: 9// starting zoom
     });
 
+    
+    //add neighborhoods layer
+
+
+
+    
+    
     // Add a popup: https://docs.mapbox.com/mapbox-gl-js/example/popup/
     //This popup will show where the new Apple campus will be 
     
-  
+map.on('load', function() {
+
+map.addSource('neighborhoods', {
+    type: 'geojson',
+    data: './neighborhoods.geojson'
+  })
+
+map.addLayer({
+'id': 'neighborhoods',
+'type': 'fill',
+'source': 'neighborhoods',
+'layout': {},
+'paint': {
+'fill-color': '#088',
+'fill-opacity': 0.8
+}
+})
+
+});
 
     // create a HTML element for each feature
     var elApple = document.createElement('div');
