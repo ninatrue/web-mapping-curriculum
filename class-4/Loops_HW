@@ -1,0 +1,100 @@
+/* ******* Code practice ******* */
+
+/* *********************
+        LOOPS!
+********************* */
+
+// In the functions section of this homework, you wrote a function that could execute a certain set of instructions whenever you wanted. You could even call on that function multiple times in a row. But what if you wanted to call that function a set number of times without having to write write the function out every single time? Or what if you had a list of things, all related to the task your function was written to do? This is where LOOPS come in!
+
+// Here's an example of a function being called multiple times in a loop. Click the "run" button to see the results.
+
+function snoop(number) {
+  if (number === 3) {
+    console.log(number + " to the");
+  } else {
+    console.log(number);
+  }
+}
+
+// for(i = 1; i < 5; i++) {
+//   snoop(i)
+// }
+
+/* **** FOR LOOPS **** */
+// You should be familiar with a function's structure, but the loop might be new to you. The one above is called a "for loop." A for loop can be configured to run a certain number of times. Inside the *body* of the for loop (the bit between the curly brackets), you can provide any number of statements, including calls to functions! All of the code inside the *body* of the for loop will execute as many times as is necessary to match the configuration you provide.
+
+// The for statement creates a loop that consists of three optional expressions, enclosed in parentheses and separated by semicolons, followed by a statement (usually a block statement) to be executed in the loop. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for
+
+// The optional expressions at the beginning of the for statement tell the loop: 
+  // a) initialization: this provides the starting value for the loop. Most often, you'll see this written as "i = 0"
+  // b) condition: a logical statement that is evaluated each time you go through the loop. If the statement is still true, the loop continues. If the statement is false, the loop ends. Usually, you'll see this written as "i < [some number]"
+  // c) final expression: at the end of each loop iteration, this expression will be evaluated. Usually, this will increment or decrement the initial value. Most often, you'll see this written as "i++", which means "add one to whatever the value of i was at the end of the loop."
+
+// Here is a for loop that will run 4 times, logging the value of "i" each time.
+
+// for(i = 0; i < 4; i++) {
+//   console.log(i);
+// }
+
+/* EXERCISE */
+// [1] Write a function that prints "Good morning!" Then, write a for loop that calls your function 10 times.
+
+function tenmornings () {
+ console.log("Good morning!")
+};
+
+
+for(i = 0; i < 10; i++) {
+  tenmornings(i)
+}
+
+// For loops and arrays.
+// Often, developers will use for loops to iterate through arrays and do some action for each item in the array. Here's an example: 
+
+var myArray = ['Mary', 'had', 'a', 'little', 'lamb'];
+
+// for(i = 0; i < myArray.length; i++) {
+//   console.log(myArray[i] + ' ');
+// }
+
+// Notice how this loop doesn't specify the *condition* as a number. Instead, it is dependent on the length of the array. It will loop through the array exactly as many times as there are items in the array. Because of this and because the value of "i" starts at 0, "i" can also be used as a stand-in for the current position in the array. myArray[i] means "if this is the second time through the loop, get the second item in the array."
+
+/* EXERCISE */
+// [2] Write a for loop that iterates through the following list of numbers and prints out the product of that number times 5.
+
+var numberArray = ['2', '10', '5', '4.5'];
+
+for(i = 0; i < numberArray.length; i++) {
+  console.log(numberArray[i]);
+}
+
+
+
+/* **** forEach loops **** */
+
+// Is there another way to loop through an array? Yes! It's called forEach. 
+
+function printWord(word) {
+  console.log(word);
+}
+
+//myArray.forEach(printWord);
+
+// You many have noticed a couple of things right away:
+  // * `.forEach()` is a function that is accessed via the array itself! 
+  // * The `forEach()` function accepts a function as its argument.
+
+// `forEach` will be called once for each item in the array. Each time it is called, it will call a *callback function* and pass it the current item as an argument. In the above example, the loop runs once for each item in `myArray`. Each time through the loop, `printWord` is called and receives the item correspending with the current loop as an argument.
+
+/* EXERCISE */
+// [3] Create an array with a list of names. Loop through that array using forEach and print that name plus " is my friend."
+
+var friendArray = ['Molly', 'Dolly', 'Holly', 'My mom'];
+
+for(i = 0; i < numberArray.length; i++) {
+  console.log(friendArray[i] +' '+ "is my friend");
+}
+
+
+
+// Why not use forEach all the time? In many ways, it's a simpler way to loop through an array with forEach. There are still some very good reasons for using a for loop, but we won't get into the details of that here.
