@@ -3,7 +3,7 @@ Objects recap
 
 An object is a series of ____’s : ____’s
 
-Objects are key value pairs. 
+Objects are key value pairs. Key: value
 
 What kinds of things can be included in an object?
 
