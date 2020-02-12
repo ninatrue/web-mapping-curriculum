@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Add a GeoJSON polygon</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuc3dpY2siLCJhIjoiY2swb2g4Z3hqMGFzYTNjbXdxc3F6dWZlaSJ9.Jo1SOIQUg0JV6HK4wEv36w';
+var map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mapbox/streets-v11',
+center: [-117.097648, 32.761],
+zoom: 20
+});
+ 
+map.on('load', function() {
+map.addSource('myHouse', {
+'type': 'geojson',
+'data': {
+
+"type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "MyHouse"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.09776893258095,
+              32.760952592336274
+            ],
+            [
+              -117.09767505526543,
+              32.76088718092699
+            ],
+            [
+              -117.0976187288761,
+              32.76098642580495
+            ],
+            [
+              -117.09763213992119,
+              32.76099995918884
+            ],
+            [
+              -117.09759995341301,
+              32.76104507045359
+            ],
+            [
+              -117.09765896201132,
+              32.76106988163945
+            ],
+            [
+              -117.09768041968346,
+              32.76102025926081
+            ],
+            [
+              -117.09773004055025,
+              32.761038303765346
+            ],
+            [
+              -117.09776893258095,
+              32.760952592336274
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+
+}
+});
+map.addLayer({
+'id': 'myHouse',
+'type': 'fill',
+'source': 'myHouse',
+'layout': {},
+'paint': {
+'fill-color': '#088',
+'fill-opacity': 0.8
+}
+});
+});
+
+
+map.on('click', 'myHouse', function(e) {
+
+    map.setPaintProperty('myHouse', 'fill-color', '#faafee')
+
+});
+
+
+</script>
+ 
+</body>
+</html>
