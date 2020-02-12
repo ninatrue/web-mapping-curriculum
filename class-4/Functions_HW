@@ -1,0 +1,55 @@
+/* ******* Code practice ******* */
+/* Welcome to repl.io! This system is designed to help you practice your programming skills. You can add code to this section and click the green ⏯ "run" button above to test your code. */
+
+
+// A named function is a set of statements that execute tasks.  Anatomy of a function: 
+
+//function NAME(parameter){Executable code}
+
+/* ******* CALLING A FUNCTION ******** */
+//Defining a function does not make that function run. To execute a function, you need to use a function call. "Calling" a function means asking your computer to execute the code inside of it. In JavaScript, you call a function by typing out its name followed by parentheses "()". If your function is called doSomething, you would call it by typing doSomething(). Check out some examples of function definitions and calls here: https://www.w3schools.com/js/js_functions.asp
+
+// In JavaScript, you call console.log("The thing to print") to print something. 
+
+// "Print" doesn't mean you're sending a document to a printer. It means writing a value that you provide on the screen.
+
+//Assignment 
+
+// [1]  Print "hello" once. 
+
+console.log("hello");
+
+// [2] Write a function called print that prints "My favorite book" once and then call that function. . 
+
+function print () {
+  console.log("My favorite book")
+}
+
+print();
+
+// [3] Write a function called doubleprint that calls your print function twice. Call doubleprint.
+
+// function doubleprint () {
+//  console.log("My favorite book ".repeat(2))
+// }
+
+function doubleprint () {
+ print()
+ print()
+}
+
+doubleprint();
+
+//Parameters vs Arguments. 
+//Thus far, we have been writing functions without parameters. Parameters are placeholder values that you supply to the function. These parameters are placed within the parentheses and signal that this function needs an argument. For example, the following has two parameters (accepts two arguments) x and y: doSomething(x, y). When calling our functions, we substitute our parameters (placeholders) for real values. These real values are called arguments. If we wanted to call our doSomething function then we would need to pass in two arguments: doSomething(4,"something"). Learn more about parameters and arguments here: https://www.w3schools.com/js/js_function_parameters.asp 
+
+
+// [4] Write a function called myfavoritebook that accepts two parameters: text, book. In the body of the function (between the {}), write console.log(text), console.log(book). Call your new function and replace the first parameter with your print function and the second parameter with "Your favorite book".
+
+function myfavoritebook (text, book) {
+  console.log(text),
+  console.log(book)
+
+};
+
+myfavoritebook(print(), "Book!");
