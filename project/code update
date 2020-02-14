@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Display a map</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
+  
+  <!-- Add mapbox gl geocoder plugin here -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
+  <link
+  rel="stylesheet"
+  href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css"
+  type="text/css"
+  />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <script>
+      
+ 
+    
+
+   // Initialize the map
+   mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuc3dpY2siLCJhIjoiY2swb2g4Z3hqMGFzYTNjbXdxc3F6dWZlaSJ9.Jo1SOIQUg0JV6HK4wEv36w';
+    var map = new mapboxgl.Map({
+      container: 'map', // container id
+      style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+      center: [-97.722,30.299], // starting position [lng, lat]
+      zoom: 9// starting zoom
+    });
+
+    //Add breweries layer
+
+map.on('load', function() {
+map.addSource('Breweries', {
+'type': 'geojson',
+'data': 
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.771046,
+        "field_2": 30.40726,
+        "field_4": "6506 Delmonico Dr, Austin TX, www.bullcreekbrewing.com/, Planned",
+        "name": "Bull Creek Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.771046,
+            30.40726
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.92585,
+        "field_2": 30.40692,
+        "field_4": "4602 Weletka Dr-Suite 300, Austin TX, (917)977-1806, www.infamousbrewing.com/, Fri 4:00pm-9:00pm, Sat 3:00pm-9:00pm, Sun 1:00pm-5:00pm",
+        "name": "Infamous Brewing Co"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.92585,
+            30.40692
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.87395,
+        "field_2": 30.4059,
+        "field_4": "6550 Comanche Trail, Austin TX, (512)266-0111, www.oasistexasbrewingcompany.com, Thu 5-10pm, Fri 2pm-Midnight, Sat Noon-Midnight, Sun Noon-10pm",
+        "name": "Oasis - Texas Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.87395,
+            30.4059
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.87454,
+        "field_2": 30.40549,
+        "field_4": "6550 Comanche Trail, Austin TX, (512)266-0111, Sun-Thu 11:00am-1:00am, Fri-Sat 11:00am-2:00am",
+        "name": "Uncle Billy's Brew & Que"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.87454,
+            30.40549
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.99794,
+        "field_2": 30.71868,
+        "field_4": "1431 County Road 264, Bertram TX, (512)508-8697, www.facebook.com/LazyTreeRanch/, Fri 5-9pm, Sat 3-9pm",
+        "name": "Lazy Tree Ranch Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.99794,
+            30.71868
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.831275,
+        "field_2": 30.528806,
+        "field_4": "1700 North Bell Blvd, Cedar Park TX, (512)963-6701, www.hellorhighwaterbrewing.com, Call",
+        "name": "Hell or High Water Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.831275,
+            30.528806
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.877034,
+        "field_2": 30.514859,
+        "field_4": "3200 Woodall Dr # C-1, Cedar Park TX, (512)228-7184, Planned",
+        "name": "Ironsight Brewers"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.877034,
+            30.514859
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.780936,
+        "field_2": 30.533692,
+        "field_4": "13010 West Parmer Lane #800, Cedar Park TX, (512)986-7038, www.redhornbrew.com, Mon-Thu 7am-10pm, Fri-Sat 7am-11pm, Sun 8am-10pm",
+        "name": "Red Horn Coffee House & Brewery"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.780936,
+            30.533692
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.7803,
+        "field_2": 30.53474,
+        "field_4": "3200 West Whitestone Blvd - Suite C1, Cedar Park TX, (512)393-9224, www.texmexbeer.com, Call",
+        "name": "Twisted X Brewing Co"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.7803,
+            30.53474
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.82441,
+        "field_2": 30.52353,
+        "field_4": "601 East Whitestone Blvd, Cedar Park TX, (512)765-4828, www.whitestonebrewery.com, Mon-Wed 3-9pm, Thu 2-10pm, Fri-Sat noon-midnight, Sun noon-9pm",
+        "name": "Whitestone Brewery"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.82441,
+            30.52353
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.726731,
+        "field_2": 30.836424,
+        "field_4": "101 Via Daniela, Florence TX, Planned",
+        "name": "Daniela Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.726731,
+            30.836424
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.67798,
+        "field_2": 30.63326,
+        "field_4": "2500 NE Inner Loop #3105, Georgetown TX, (512)688-5046, www.rentschbrewery.com, Fri 4-8pm, Sat noon-8pm",
+        "name": "Rentsch Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.67798,
+            30.63326
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.44434,
+        "field_2": 30.71749,
+        "field_4": "109 West Davilla St, Granger City, TX, (512)717-1859, Call",
+        "name": "Granger City Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.44434,
+            30.71749
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.842431,
+        "field_2": 30.56176,
+        "field_4": "1309 Leander Dr #504, Leander TX, www.bindlestickbeer.com, Open Fri-Sat evenings @ 6pm",
+        "name": "Bindlestick Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.842431,
+            30.56176
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.851636,
+        "field_2": 30.58087,
+        "field_4": "216 North Gabriel St, Leander TX, Planned",
+        "name": "Ponyfoot Public House"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.851636,
+            30.58087
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.853009,
+        "field_2": 30.5816,
+        "field_4": "100 East Evans St, Leander TX, Planned",
+        "name": "5th Element Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.853009,
+            30.5816
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.870204,
+        "field_2": 30.705205,
+        "field_4": "7100 FM3405, Liberty Hill TX, (512)940-5079, www.bullcreekbrewing.com/, Sat noon-5pm",
+        "name": "Bull Creek Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.870204,
+            30.705205
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.901256,
+        "field_2": 30.71297,
+        "field_4": "500 Chaparral Dr, Liberty Hill TX, (512)627-9384, www.sangabrielriverbrewery.com, Fri 4-8pm, Sat noon-8pm",
+        "name": "San Gabriel River Brewery"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.901256,
+            30.71297
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.64696,
+        "field_2": 30.49195,
+        "field_4": "1700 Bryant Dr, Round Rock TX, (512)774-4258, www.bluebonnetbeerco.com, Fri-Sat 5-8pm",
+        "name": "Bluebonnet Beer Co"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.64696,
+            30.49195
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.66484,
+        "field_2": 30.47024,
+        "field_4": "16920 Joe Barbee Dr, Round Rock TX, (512)527-3235, www.idlevinebrewery.com, Call",
+        "name": "Idle Vine Brewery"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.66484,
+            30.47024
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.72487,
+        "field_2": 30.50746,
+        "field_4": "8115 Campeche Bay Pl, Round Rock TX, (512)496-8818, www.seventhsentinel.com/, Planned",
+        "name": "Seventh Sentinel, LLC"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.72487,
+            30.50746
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.67979,
+        "field_2": 30.49011,
+        "field_4": "2000 South Interstate 35 - Suite B1, Round Rock TX, (512)244-3549, Planned",
+        "name": "Flix Brewhouse"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.67979,
+            30.49011
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.631437,
+        "field_2": 30.496802,
+        "field_4": "1311 Leah Lane, Round Rock TX, (512)740-7424, Planned",
+        "name": "Southern Heights Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.631437,
+            30.496802
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.409958,
+        "field_2": 30.56894,
+        "field_4": "201 North Main St, Taylor TX, (512)466-6939, www.texasbeerco.com, Thu-Fri 4-10pm, Sat noon-midnight",
+        "name": "Texas Beer Co"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.409958,
+            30.56894
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.71194,
+        "field_2": 30.38519,
+        "field_4": "10615 Metric Blvd, Austin TX, (512)904-9817, www.4thtap.coop, Mon-Thu 11am-10pm, Fri-Sat 11am-midnight, Sun noon-10pm",
+        "name": "4th Tap Brewing Co-Op"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.71194,
+            30.38519
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.76982,
+        "field_2": 30.223,
+        "field_4": "407 Radam Lane, F200, Austin TX, (512)707-2337, www.512brewing.com/, Tours on Saturdays at 11:00am and 12:30pm, or Call",
+        "name": "(512) Brewing Company"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.76982,
+            30.223
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.72016,
+        "field_2": 30.38267,
+        "field_4": "2314 Rutland Dr - Suite 100, Austin TX, (512)568-1462, www.adelbertsbeer.com/, Open on Fridays 5-8pm, or Call",
+        "name": "Adelbert's Brewery"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.72016,
+            30.38267
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.72986,
+        "field_2": 30.38004,
+        "field_4": "3009 Industrial Terrace - Suite 150, Austin TX, (512)821-2494, www.austinbeerworks.com/, Thu 5-9pm, Fri 5-11pm, Sat-Sun 1-7pm",
+        "name": "Austin Beer Works"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.72986,
+            30.38004
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.72832,
+        "field_2": 30.31142,
+        "field_4": "204 West 46th St, Austin TX, (512)423-6579, www.barrelassembly.com, Call",
+        "name": "Barrel Assembly"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.72832,
+            30.31142
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.71869,
+        "field_2": 30.3386,
+        "field_4": "7020 Easy Wind Dr- Suite 100, Austin TX, (512)452-2337, www.blackstar.coop/, Monï¿½Thu 4:00pmï¿½Midnight, Friï¿½ Sat 11:00amï¿½1:00am, Sun 11:00pmï¿½Midnight",
+        "name": "Black Star Co-op Pub + Brewery"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.71869,
+            30.3386
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.71772,
+        "field_2": 30.25488,
+        "field_4": "2400 East Cesar Chavez St #300, Austin TX, (512)593-1262, www.blueowlbrewing.com, Wed-Fri 5-10pm, Sat noon-10pm, Sun noon-5pm",
+        "name": "Blue Owl Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.71772,
+            30.25488
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.70204,
+        "field_2": 30.253,
+        "field_4": "4715 East 5th St, Austin TX, (512)520-8199, www.thebrewerstable.com/, Sun-Thu 11:00am-10:00pm, Fri-Sat 11:00am-11:00pm",
+        "name": "Brewer's Table"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.70204,
+            30.253
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.74568,
+        "field_2": 30.26857,
+        "field_4": "305 West Sixth St, Austin TX, (512)457-0300, Call",
+        "name": "Brewery DADA"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.74568,
+            30.26857
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.71599,
+        "field_2": 30.37973,
+        "field_4": "10001 Metric Blvd, Austin TX, (512)524-2377, celisbrewery.com/, (Closed?)Mon 5-10pm, Tue-Thu 3-10pm, Fri-Sun noon-10pm. Tours Sat and Sun afternoons",
+        "name": "Celis Brewery"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.71599,
+            30.37973
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.7159,
+        "field_2": 30.39117,
+        "field_4": "2340-B West Braker Lane, Austin TX, (512)814-7599, circlebrewing.com/, Thu 5-9pm, Fri 5-10pm, Sat noon-10pm, Sun noon-6pm",
+        "name": "Circle Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.7159,
+            30.39117
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.74262,
+        "field_2": 30.31006,
+        "field_4": "4112 Medical Parkway, Austin TX, (512)452-6258, Mon-Thu 3:00pm-2:00am, Fri-Sun 1:00pm-2:00am",
+        "name": "Draught House Pub and Brewery"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.74262,
+            30.31006
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.75566,
+        "field_2": 30.21359,
+        "field_4": "1005 East Saint Elmo Rd, Austin TX, Planned",
+        "name": "Feral Tun Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.75566,
+            30.21359
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.6959,
+        "field_2": 30.26347,
+        "field_4": "979 Springdale Rd, Austin TX, (713)444-7584, www.friendsandallies.beer, Mon-Thu 4-10pm, Fri 2pm-midnight, Sat noon-midnight, Sun noon-8pm",
+        "name": "Friends & Allies Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.6959,
+            30.26347
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.86336,
+        "field_2": 30.33937,
+        "field_4": "1607 Cuernavaca Dr N, Austin TX, (850)322-7498, www.facebook.com/FrontyardBrewing/, Call",
+        "name": "Frontyard Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.86336,
+            30.33937
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.73027,
+        "field_2": 30.35046,
+        "field_4": "7517 Saint Phillip St, Austin TX, (512)628-0142, www.goodlibationsbrewing.com/, Call",
+        "name": "Good Libations Brewing Co"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.73027,
+            30.35046
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.82103,
+        "field_2": 30.21056,
+        "field_4": "3014 West William Cannon Dr, Austin TX, Planned",
+        "name": "Greendog Brewery"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.82103,
+            30.21056
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.67983,
+        "field_2": 30.2269,
+        "field_4": "1201-A Bastrop Highway, Austin TX, (512)382-5264, www.hisignbrewing.com, Wed-Thu 2-10pm, Fri-Sat noon-10pm, Sun noon-8pm",
+        "name": "Hi Sign Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.67983,
+            30.2269
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.75897,
+        "field_2": 30.27139,
+        "field_4": "1208 West 4th St, Austin TX, (512)296-6495, www.holdoutbrewing.com, Open daily 8am-midnight",
+        "name": "Hold Out Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.75897,
+            30.27139
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.71189,
+        "field_2": 30.25845,
+        "field_4": "507 Calles St #101, Austin TX, (512)914-2467, www.hopsandgrain.com/, Open daily 10:00am-10:00pm",
+        "name": "Hops & Grain Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.71189,
+            30.25845
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.80459,
+        "field_2": 30.33569,
+        "field_4": "3801 North Capital of Texas Hwy, Austin TX, www.horizonbrewingcompany.com/, Planned",
+        "name": "Horizon Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.80459,
+            30.33569
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.73684,
+        "field_2": 30.21247,
+        "field_4": "3913 Todd Lane #607, Austin TX, (512)707-0099, Tours and tastings at 1:00pm on the first Saturday of each month",
+        "name": "Independence Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.73684,
+            30.21247
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.99513,
+        "field_2": 30.23343,
+        "field_4": "13005 Fitzhugh Road, Austin TX, (512)537-5100, www.jesterkingbrewery.com/, Sat 1-4pm",
+        "name": "Jester King Craft Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.99513,
+            30.23343
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.73948,
+        "field_2": 30.23802,
+        "field_4": "1950 South IH 35, Austin TX, (512)442-5337, whipin.com/, Open daily 10:00am-midnight",
+        "name": "Kamala Brewing at the Whip In"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.73948,
+            30.23802
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.84183,
+        "field_2": 30.3138,
+        "field_4": "201 North Weston Lane, Austin TX, Planned",
+        "name": "Karst Canyon Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.84183,
+            30.3138
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.72201,
+        "field_2": 30.26174,
+        "field_4": "1902 East 6th St, Austin TX, (512)394-7620, www.lazarusbrewing.com, Mon-Wed 7:30am-11pm, Thu-Fri 7:30am-midnight, Sat 10am-midnight, Sun 10am-10pm",
+        "name": "Lazarus Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.72201,
+            30.26174
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.7057,
+        "field_2": 30.25474,
+        "field_4": "3301-B East Fifth St, Austin TX, (512)385-2299, www.liveoakbrewing.com/, Call for tours",
+        "name": "Live Oak Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.7057,
+            30.25474
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.73828,
+        "field_2": 30.26686,
+        "field_4": "604 Neches St, Austin TX, (512)477-1268, Open 4:00pm-2:00am",
+        "name": "Lovejoy's Brewpub"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.73828,
+            30.26686
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.74306,
+        "field_2": 30.26715,
+        "field_4": "Austin TX, moonlighttowerbrewing.com/, planned",
+        "name": "Moonlight Tower Brewing Co"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.74306,
+            30.26715
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.76056,
+        "field_2": 30.22444,
+        "field_4": "3804-A Woodbury Dr, Austin TX, (512)587-9669, www.nomadicbeerworks.com/, Mon-Fri 7:30am-10:00pm, Sat 9:30am-10:00pm, Sun 9:30am-8:00pm",
+        "name": "Nomadic Beerworks"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.76056,
+            30.22444
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.73824,
+        "field_2": 30.39069,
+        "field_4": "10010 North Capital of Texas Highway, Austin TX, (512)467-6969, Mon-Thu 11am-11pm, Fri 11am-Midnight, Sat 10am-midnight, Sun 10am-11pm; Happy Hour 4pm-7pm daily",
+        "name": "North by Northwest Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.73824,
+            30.39069
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.70541,
+        "field_2": 30.28645,
+        "field_4": "3108 Manor Rd, Austin TX, www.oddwoodales.com, Tue-Thu 4-11pm, Fri 3-11pm, Sat 11:30am-11pm, Sun 11:30am-8pm",
+        "name": "Oddwood Ales"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.70541,
+            30.28645
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.73071,
+        "field_2": 30.21294,
+        "field_4": "4700-F Burleson Road, Austin TX, (512)428-5217, www.orfbrewing.com/, Thu-Fri 4-8pm, Sat noon-6pm",
+        "name": "Orf Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.73071,
+            30.21294
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.71427,
+        "field_2": 30.38356,
+        "field_4": "10420 Metric Blvd, Austin TX, (512)243-7054, www.oskarblues.com/, Sun-Mon noon-8pm, Tue-Sat noon-10pm",
+        "name": "Oskar Blues Brewery"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.71427,
+            30.38356
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.73892,
+        "field_2": 30.31869,
+        "field_4": "4729 Burnet Road, Austin TX, (512)436-9605, www.pinthousepizza.com/, Sun-Wed 11am-11pm, Thu-Sat 11am-12am",
+        "name": "Pinthouse Pizza Brewpub"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.73892,
+            30.31869
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.73846,
+        "field_2": 30.26609,
+        "field_4": "503 Neches St, Austin TX, (248)670-6366, www.resignationbrewery.com, Call",
+        "name": "Resignation Brewery"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.73846,
+            30.26609
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.75555,
+        "field_2": 30.2138,
+        "field_4": "1005 East Saint Elmo Rd #2, Austin TX, (737)300-1002, www.skullmechanixbrewing.com, Mon-Thu 3-10pm, Fri 3-11pm, Sat 1-11pm, Sun 1-10pm",
+        "name": "Skull Mechanix Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.75555,
+            30.2138
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.76238,
+        "field_2": 30.21511,
+        "field_4": "415 East St Elmo Road, Austin TX, (512)968-8297, www.southaustinbrewery.com/, (Closed?)Call for Tours",
+        "name": "South Austin Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.76238,
+            30.21511
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.66951,
+        "field_2": 30.27689,
+        "field_4": "6014 Techni Center Dr #2-101, Austin TX, (512)358-4350, Thu-Fri 4:00pm-10:00pm, Sat noon-10:00pm, Sun noon-7:00pm",
+        "name": "Southern Heights Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.66951,
+            30.27689
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.76197,
+        "field_2": 30.21641,
+        "field_4": "440 East Saint Elmo Rd #G2, Austin TX, (737)300-1965, www.stelmobrewing.com, Tue-Thu 4-11pm, Fri 4pm-midnight, Sat 11am-midnight, Sun noon-11pm",
+        "name": "St. Elmo Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.76197,
+            30.21641
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.92785,
+        "field_2": 30.24655,
+        "field_4": "9936 Circle Dr, Austin TX, sudsmonkeybrew.com, Planned",
+        "name": "Suds Monkey Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.92785,
+            30.24655
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.76875,
+        "field_2": 30.2455,
+        "field_4": "1305-B West Oltorf St, Austin TX, (512)298-2242, theabgb.com/, Tue-Thu 11:30am-11pm, Fri 11:30am-12am, Sat 12pm-12am, Sun 12pm-10pm",
+        "name": "The Austin Beer Garden Brewing Co"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.76875,
+            30.2455
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.71683,
+        "field_2": 30.32592,
+        "field_4": "6015-A Dillard Circle, Austin TX, (512)524-0323, www.thebrewtorium.com, Tue-Thu 4-10pm, Fri 2-11pm, Sat noon-11pm, Sun noon-8pm",
+        "name": "The Brewtorium Brewery & Kitchen"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.71683,
+            30.32592
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.78331,
+        "field_2": 30.17557,
+        "field_4": "8201 South Congress Ave, Austin TX, (512)579-0679, www.thirstyplanet.net/ Sat 11am-2pm",
+        "name": "Thirsty Planet Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.78331,
+            30.17557
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.76118,
+        "field_2": 30.26209,
+        "field_4": "1530 Barton Springs Road, Austin TX, (512)476-0100, Sun-Thu 11:00am-Midnight, Fri-Sat 11:00am-2:00am",
+        "name": "Uncle Billy's Brew & Que"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.76118,
+            30.26209
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.78805,
+        "field_2": 30.16563,
+        "field_4": "1950 South IH-35, Austin TX, (512)442-5337, whipin.com/, Daily 10:00am-Midnight",
+        "name": "Whip In Parlour Cafe"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.78805,
+            30.16563
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.72454,
+        "field_2": 30.2621,
+        "field_4": "1701 East 6th St, Austin TX, (512)765-4946, www.zilkerbeer.com, Tue-Thu 4-10pm, Fri-Sat noon-midnight, Sun noon-8pm",
+        "name": "Zilker Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.72454,
+            30.2621
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.74035,
+        "field_2": 30.27467,
+        "field_4": "520 NAS Dr, Corpus Christi TX, (361)445-8684, www.loreleibrewing.beer, Fri-Sat 2-10pm",
+        "name": "Lorelei Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.74035,
+            30.27467
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.66082,
+        "field_2": 30.21995,
+        "field_4": "1615 Crozier Lane, Del Valle TX, (512)385-2299, www.liveoakbrewing.com/, Call",
+        "name": "Live Oak Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.66082,
+            30.21995
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.580913,
+        "field_2": 30.18878,
+        "field_4": "4836 Highway 71 East, Del Valle TX, (512)806-1900, www.nlandsurfpark.com, Tue-Sun noon-8pm",
+        "name": "NLand Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.580913,
+            30.18878
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -98.077812,
+        "field_2": 30.292163,
+        "field_4": "19510 Hamilton Pool Rd, Dripping Springs TX, (512)655-3069, familybusinessbeerco.com/, Wed-Fri 3-10pm, Sat 11am-10pm, Sun 11am-9pm",
+        "name": "Family Business Beer Co"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -98.077812,
+            30.292163
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.74521,
+        "field_2": 30.26873,
+        "field_4": "Houston TX, (713)304-5069, www.lonepint.com/, Tours and Tastings Sat noon-4pm",
+        "name": "Lone Pint Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.74521,
+            30.26873
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.62839,
+        "field_2": 30.40205,
+        "field_4": "2400 Patterson Industrial Dr, Pflugerville TX, (512)910-4099, Planned",
+        "name": "Flying Man Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.62839,
+            30.40205
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.62839,
+        "field_2": 30.40213,
+        "field_4": "2400 Patterson Industrial Dr, Pflugerville TX, (512)670-2537, www.rognessbrewing.com/, Call",
+        "name": "Rogness Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.62839,
+            30.40213
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -98.04334,
+        "field_2": 30.379218,
+        "field_4": "2214 Bee Creek Road, Spicewood TX, (317)225-1823, www.solidrockbrewing.com/, Sat 4-8pm",
+        "name": "Solid Rock Brewing"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -98.04334,
+            30.379218
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_1": -97.82682,
+        "field_2": 30.29625,
+        "field_4": "5904 Bee Caves Rd, West Lake Hills TX, (512)297-4554, www.strangelandbrewery.com, Call",
+        "name": "Strange Land Brewery"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -97.82682,
+            30.29625
+          ]
+        ]
+      }
+    }
+  ]
+}
+
+
+
+});
+// map.addLayer({
+// 'id': 'Breweries',
+// 'type': 'circle',
+// 'source': 'Breweries',
+// //'layout': {},
+// 'paint': {
+// 'circle-radius': 6,
+// 'circle-color': '#B42222'
+// },
+// });
+// });
+
+
+//cluster zoom
+
+map.addLayer({
+id: 'clusters',
+type: 'circle',
+source: 'Breweries',
+filter: ['has', 'point_count'],
+paint: {
+'circle-color': [
+'step',
+['get', 'point_count'],
+'#51bbd6',
+2,
+'#f1f075',
+5,
+'#f28cb1'
+],
+'circle-radius': [
+'step',
+['get', 'point_count'],
+20,
+2,
+30,
+5,
+20
+]
+}
+});
+
+
+  
+    //Apple Campus 
+    var popupApple = new mapboxgl.Popup().setHTML("<b>Apple Inc.</b><br /> This is where the new Apple campus will be!").addTo(map);
+    var markerApple = new mapboxgl.Marker().setLngLat([-97.767, 30.472]).setPopup(popupApple).addTo(map)
+    
+    //This popup will show where the Austin airport is
+    var popupAirport = new mapboxgl.Popup().setHTML("<b>Austin Airport</b><br />").addTo(map);
+    var markerAirport = new mapboxgl.Marker().setLngLat([-97.667, 30.196]).setPopup(popupAirport).addTo(map)
+
+
+    // Add pan and zoom controls: https://docs.mapbox.com/mapbox-gl-js/api/#map#addcontrol
+    map.addControl(new mapboxgl.NavigationControl());
+
+ 
+    // Add a search box: https://docs.mapbox.com/mapbox-gl-js/example/mapbox-gl-geocoder/
+    map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl }));
+
+</script>
+ 
+</body>
+</html>
