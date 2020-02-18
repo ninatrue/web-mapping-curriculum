@@ -1,0 +1,55 @@
+//https://repl.it/repls/FrailImmensePolyhedron
+
+/* ******* Code practice ******* */
+
+/* *********************
+        OBJECTS!
+********************* */
+
+// As we've discussed in class, JavaScript objects have a few characteristics that are useful for us when working writing programs.
+  // 1. They store information in key:value pairs, which means you can access certain values by name instead of having to know the order of a list.
+  // 2. You can put pretty much anything into an object, including strings, numbers, references to variables, even arrays and objects!
+
+// Objects are great for creating structured data. Let's say you're running a dog-walking business and need to keep track of information about your furry clients. You might create an object like this:
+
+var dogInfo = {
+  name: "Scruffy",
+  address: "123 Maple street",
+  foods: ['kibble', 'canned', 'kale smoothie'],
+  housebroken: false,
+  pickUpTimes: {
+    monday: '1pm',
+    tuesday: '11am',
+    wednesday: '1pm',
+    thursday: '3pm',
+    friday: '6am'
+  }
+}
+
+// Now, say you want to write a program that prints out a dog's name and Monday pickup time. You can access that information using something called a "property accessor" (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors).
+// You can access a property using square brackets `[]` or a dot `.`
+
+console.log(dogInfo.name);
+console.log(dogInfo.pickUpTimes.monday);
+
+// [PROMPT 1] Use a property accessor to print Scruffy's address.
+
+console.log(dogInfo.address);
+
+// [PROMPT 2] Construct a new object that stores information about your pet or a pet you know. Include: the pet's name, list of favorite foods, approximate age, and the color of its fur. Store that object as a variable called myPet.
+
+
+var myPet = {
+  name: "Holly", 
+  foods: ['table scraps', 'the other dogs food', 'carrots'],
+  age: 5, 
+  color: "white"
+}
+
+// [PROMPT 3] Write a function with one parameter called "keyName". When the function is called, it should print the value associated with the key provided.
+
+function print () {
+  console.log(myPet.name)
+}
+
+print();
