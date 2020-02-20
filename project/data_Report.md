@@ -9,7 +9,7 @@ Austin Neighborhoods:
 
 Aquired from Zillow 
 
-This data includes shapefiles of neighborhoods. It is joined with Zillow Estimated Home Values. This will aid in displaying 
+This data includes shapefiles of neighborhoods. It is joined with 2019 mean Zillow Estimated Home Values. 4 neighborhoods with no estimated home value for 2019 were deleted. This will aid in displaying 
       the most expensive neighborhoods in Austin. When displayed as a chloropleth map, the user can quickly see where the most         expensive neighborhoods are in Austin. A legend will also help the user determine where neighborhoods are in their price
       range. 
 
@@ -20,6 +20,8 @@ Download and filtered from OSM data using QGIS Plugin
 
 Data was clipped to Travis and Round Rock County 
 
+This data will help potential home buyers visualize where points of interest are. 
+
 
 Farmers Markets: 
 
@@ -27,10 +29,14 @@ download and filtered from OSM data using QGIS Plugin
 
 Data was clipped to Travis and Round Rock County 
 
+This data will help potential home buyers visualize where points of interest are. 
+
 
 Ultimate Frisbee Leagues: 
 
 frisbee leagues researched and locatiosn converted to geojson in QGIS 
+
+This data will help potential home buyers visualize where points of interest are. 
  
 
 Climbing Gyms:
@@ -54,6 +60,8 @@ When a layer is selected from the layer pane:
 When an individual amenity is clicked, the name of the amenity will appear as a popup 
 
 A search bar will be included if a user is interested in finding a specific address 
+
+The search bar will drop a pin at searched location 
 
 When the address is located information will appear on how many amenities are withing a 5 mile radius 
 
