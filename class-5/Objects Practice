@@ -1,4 +1,4 @@
-//https://repl.it/repls/FrailImmensePolyhedron
+https://repl.it/repls/PerfumedTechnicalFunnel
 
 /* ******* Code practice ******* */
 
@@ -48,8 +48,8 @@ var myPet = {
 
 // [PROMPT 3] Write a function with one parameter called "keyName". When the function is called, it should print the value associated with the key provided.
 
-function print () {
-  console.log(myPet.name)
+function print (keyName) {
+  console.log(keyName)
 }
 
-print();
+print(myPet.name);
