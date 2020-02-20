@@ -39,7 +39,7 @@ Climbing Gyms:
 
 
 
-Methodology: 
+4. Methodology: 
 
 Austin neighborhoods need to be joined with neighborhood pricing data 
 
