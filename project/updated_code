@@ -38,8 +38,8 @@
 background: #fff;
 position: absolute;
 z-index: 1;
-top: 10px;
-right: 10px;
+bottom: 60px;
+left: 10px;
 border-radius: 3px;
 width: 120px;
 border: 1px solid rgba(0, 0, 0, 0.4);
@@ -102,8 +102,8 @@ width: 10px;
 
 .map-overlay {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 60px;
+  right: 10px;
   background: rgba(255, 255, 255, 0.8);
   margin-right: 20px;
   font-family: 'Helvetica Neue', Arial;
@@ -351,8 +351,8 @@ paint: {
         .setPopup(popupAirport)
         .addTo(map);
 
-      // Add pan and zoom controls: https://docs.mapbox.com/mapbox-gl-js/api/#map#addcontrol
-      map.addControl(new mapboxgl.NavigationControl());
+    //   // Add pan and zoom controls: https://docs.mapbox.com/mapbox-gl-js/api/#map#addcontrol
+    //   map.addControl(new mapboxgl.NavigationControl());
 
       // Add a search box: https://docs.mapbox.com/mapbox-gl-js/example/mapbox-gl-geocoder/
       map.addControl(
