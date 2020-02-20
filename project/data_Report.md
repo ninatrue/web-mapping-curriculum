@@ -3,11 +3,21 @@
 2.	Objective: Provide an interactive map for home buyers and renters in Austin, TX. This map will provide both an overview of Austin neighborhood pricing distribution and local amenities clusters as well as detailed information about amenities near a specific address. This map will help people choose neighborhoods that fit their budget and lifestyle and see if specific addresses fit their requirements.   
 
 3.	Data: 
-
 a.	Austin Neighborhoods 
-b.	Breweries 
+    -aquired from Zillow 
+    -This data includes shapefiles of neighborhoods. It is joined with Zillow Estimated Home Values. This will aid in displaying 
+      the most expensive neighborhoods in Austin. When displayed as a chloropleth map, the user can quickly see where the most         expensive neighborhoods are in Austin. A legend will also help the user determine where neighborhoods are in their price
+      range. 
+b.	Breweries
+     -download and filtered from OSM data using QGIS Plugin 
+     -data was clipped to Travis and Round Rock County 
 c.	Farmers Markets 
+    -download and filtered from OSM data using QGIS Plugin
+    -data was clipped to Travis and Round Rock County 
 d.	Ultimate Frisbee Leagues 
+    -frisbee leagues researched and locatiosn converted to geojson in QGIS 
+e. Climbing Gyms 
+  
 
 4.	Methodology: 
 a.	Austin neighborhoods need to be joined with neighborhood pricing data 
