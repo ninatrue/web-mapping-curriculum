@@ -37,25 +37,27 @@ Ultimate Frisbee Leagues:
 frisbee leagues researched and locatiosn converted to geojson in QGIS 
 
 This data will help potential home buyers visualize where points of interest are. 
+
+
+Music Venues: 
+
+Data from data.texas.gov. Filtered from a list of Arts and Cultural Facilities. Excel file was formatted with lat and long in seperate columns. Excel file uploaded onto QGIS and x,y fields assigned. 
+
+Austin Airport: 
+
+Marker placed at Ausin Airport Coordinates 
  
-
-Climbing Gyms:
-  
-
-
-
-
 4. Methodology: 
 
-Austin neighborhoods need to be joined with neighborhood pricing data 
+Austin neighborhoods need to be joined with neighborhood pricing data. 
 
-Neighborhoods will be displayed as a choropleth map 
+Neighborhoods will be displayed as a choropleth map. 
 
-When a neighborhood is selected, a popup will appear with name and average home price 
+When a neighborhood is hovered over, a popup will appear with neighborhood name and average home price 
 
-Breweries, Farmers Markets, and Frisbee Leagues can be selected from a layer pane 
+Breweries, Farmers Markets, Music Venues and Frisbee Leagues can be selected for display from a layer pane 
 
-When a layer is selected from the layer pane: 
+When a layer is selected from the layer pane: the ammentities will apear as clusters or individual points based on zoom level. 
 
 When an individual amenity is clicked, the name of the amenity will appear as a popup 
 
@@ -63,6 +65,6 @@ A search bar will be included if a user is interested in finding a specific addr
 
 The search bar will drop a pin at searched location 
 
-When the address is located information will appear on how many amenities are withing a 5 mile radius 
+When the address is located information will appear on how many amenities are withing a 5 mile radius. 
 
 
