@@ -76,6 +76,8 @@ color: #ffffff;
 background: #3074a4;
 }
 
+
+
 .legend {
 background-color: #fff;
 border-radius: 3px;
@@ -159,93 +161,31 @@ width: 10px;
       });
 
       //Add breweries layer
-
-    
-var brew_geojson = 'https://raw.githubusercontent.com/ninatrue/project/master/Breweries'
-
-
-
- map.on("load", function() {
+    map.on("load", function() {
         map.addSource("Breweries", {
           type: "geojson",
-          data: brew_geojson,
-          cluster: true,
-          clusterMaxZoom: 15,
-          clusterRadius: 50
+          data: 'https://raw.githubusercontent.com/ninatrue/project/master/Breweries',
+        //   cluster: true,
+        //   clusterMaxZoom: 4,
+        //   clusterRadius: 10
         });
-      
-        map.addLayer({
-id: 'clusters',
-type: 'circle',
-source: 'Breweries',
-filter: ['has', 'point_count'],
-paint: {
-// Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-// with three steps to implement three types of circles:
-//   * Blue, 20px circles when point count is less than 100
-//   * Yellow, 30px circles when point count is between 100 and 750
-//   * Pink, 40px circles when point count is greater than or equal to 750
-'circle-color': [
-'step',
-['get', 'point_count'],
-'#51bbd6',
-2,
-'#f1f075',
-3,
-'#f28cb1'
-],
-'circle-radius': [
-'step',
-['get', 'point_count'],
-20,
-2,
-30,
-3,
-40
-]
-}
-});
- 
-map.addLayer({
-id: 'cluster-count',
-type: 'symbol',
-source: 'Breweries',
-filter: ['has', 'point_count'],
-layout: {
-'text-field': '{point_count_abbreviated}',
-'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-'text-size': 12
-}
-});
- 
-map.addLayer({
-id: 'unclustered-point',
-type: 'circle',
-source: 'Breweries',
-filter: ['!', ['has', 'point_count']],
-paint: {
-'circle-color': '#11b4da',
-'circle-radius': 4,
-'circle-stroke-width': 1,
-'circle-stroke-color': '#fff'
-}
 
-        // map.addLayer({
-        //   id: "Breweries",
-        //   type: "circle",
-        //   source: "Breweries",
-        //   paint: {
-        //     "circle-radius": 6,
-        //     "circle-color": "red"
-        //   }
-        // });
+        //display on map 
+        map.addLayer({
+          id: "Breweries",
+          type: "circle",
+          source: "Breweries",
+          paint: {
+            "circle-radius": 6,
+            "circle-color": "red"
+          }
+        });
 
     });
-  });
+
       //Add farmers market's layer 
     
 
-      
       map.on("load", function() {
         map.addSource("Markets", {
           type: "geojson",
@@ -255,6 +195,7 @@ paint: {
         //   clusterRadius: 10
         });
 
+        //display on map
         map.addLayer({
           id: "Markets",
           type: "circle",
@@ -267,7 +208,42 @@ paint: {
 
     });
 
-    
+//Add Music Venue Layer 
+
+map.on("load", function() {
+        map.addSource("Music", {
+          type: "geojson",
+          data: 'https://raw.githubusercontent.com/ninatrue/project/master/Music',
+        //   cluster: true,
+        //   clusterMaxZoom: 4,
+        //   clusterRadius: 10
+        });
+
+        //display on map 
+        map.addLayer({
+          id: "Music",
+          type: "circle",
+          source: "Music",
+          paint: {
+            "circle-radius": 8,
+            "circle-color": "green"
+          }
+        });
+
+    });
+
+    //add popup when Music Layer is clicked that displays name of venue and description 
+    map.on('click', 'Music', function(e) {
+
+var musicpop = e.features[0].properties.Name
+var musicpop_d = e.features[0].properties.Web_Notes
+
+ new mapboxgl.Popup()
+.setLngLat(e.lngLat)
+.setHTML('<h3><strong>'+ musicpop + '<p>' + musicpop_d) //need to work on making description not bold 
+.addTo(map);
+});   
+
 
     //Add Neighborhoods Layer
 
@@ -277,11 +253,12 @@ paint: {
           data: 'https://raw.githubusercontent.com/ninatrue/project/master/updated_neighborhoods1',
         });
 
+        //display on map 
         map.addLayer({
           id: "Neighborhoods",
           type: "fill",
           source: "Neighborhoods",
-          
+          //create a chloropleth map based on 2019 estimated home value 
          paint: {
           "fill-color": ["interpolate",["linear"],["get","HousingPri"],
           0,
@@ -312,7 +289,8 @@ paint: {
 
 
       
-      
+      //display neighborhood name and estimated home value when area is hovered over 
+      //need to figure out how to add commas and dollar sign 
       map.on('mousemove', function(e) {
   var prices = map.queryRenderedFeatures(e.point, {
     layers: ['Neighborhoods']
@@ -326,23 +304,18 @@ paint: {
 });
 
 
-       
+      //  // Add marker at Apple Campus and create popup 
+      // var popupApple = new mapboxgl.Popup()
+      //   .setHTML(
+      //     "<b>Apple Inc.</b><br /> This is where the new Apple campus will be!"
+      //   )
+      //   .addTo(map);
+      // var markerApple = new mapboxgl.Marker()
+      //   .setLngLat([-97.767, 30.472])
+      //   .setPopup(popupApple)
+      //   .addTo(map);
 
-      
-
-
-      //Apple Campus
-      var popupApple = new mapboxgl.Popup()
-        .setHTML(
-          "<b>Apple Inc.</b><br /> This is where the new Apple campus will be!"
-        )
-        .addTo(map);
-      var markerApple = new mapboxgl.Marker()
-        .setLngLat([-97.767, 30.472])
-        .setPopup(popupApple)
-        .addTo(map);
-
-      //This popup will show where the Austin airport is
+      //Add Austin Airport to Map 
       var popupAirport = new mapboxgl.Popup()
         .setHTML("<b>Austin Airport</b><br />")
         .addTo(map);
@@ -352,6 +325,7 @@ paint: {
         .addTo(map);
 
     //   // Add pan and zoom controls: https://docs.mapbox.com/mapbox-gl-js/api/#map#addcontrol
+    //  // Don't really think I need  these 
     //   map.addControl(new mapboxgl.NavigationControl());
 
       // Add a search box: https://docs.mapbox.com/mapbox-gl-js/example/mapbox-gl-geocoder/
@@ -362,8 +336,9 @@ paint: {
         })
       );
 
-
-var toggleableLayerIds = ['Breweries', 'Markets'];
+//create toggleable layers for Breweries, Markets, and Music 
+//need to figure out why you have to click twice ugh 
+var toggleableLayerIds = ['Breweries', 'Markets', 'Music'];
  
  for (var i = 0; i < toggleableLayerIds.length; i++) {
  var id = toggleableLayerIds[i];
