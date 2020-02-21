@@ -115,12 +115,11 @@ width: 10px;
 }
 
 .marker {
-  background-image: url('');
-  background-size: cover;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  cursor: pointer;
+display: block;
+border: none;
+border-radius: 50%;
+cursor: pointer;
+padding: 0;
 }
 
 
@@ -160,91 +159,8 @@ width: 10px;
         zoom: 11 // starting zoom
       });
 
-      //Add breweries layer
-    map.on("load", function() {
-        map.addSource("Breweries", {
-          type: "geojson",
-          data: 'https://raw.githubusercontent.com/ninatrue/project/master/Breweries',
-        //   cluster: true,
-        //   clusterMaxZoom: 4,
-        //   clusterRadius: 10
-        });
-
-        //display on map 
-        map.addLayer({
-          id: "Breweries",
-          type: "circle",
-          source: "Breweries",
-          paint: {
-            "circle-radius": 6,
-            "circle-color": "red"
-          }
-        });
-
-    });
-
-      //Add farmers market's layer 
-    
-
-      map.on("load", function() {
-        map.addSource("Markets", {
-          type: "geojson",
-          data: 'https://raw.githubusercontent.com/ninatrue/project/master/Markets',
-        //   cluster: true,
-        //   clusterMaxZoom: 4,
-        //   clusterRadius: 10
-        });
-
-        //display on map
-        map.addLayer({
-          id: "Markets",
-          type: "circle",
-          source: "Markets",
-          paint: {
-            "circle-radius": 6,
-            "circle-color": "dodgerblue"
-          }
-        });
-
-    });
-
-//Add Music Venue Layer 
-
-map.on("load", function() {
-        map.addSource("Music", {
-          type: "geojson",
-          data: 'https://raw.githubusercontent.com/ninatrue/project/master/Music',
-        //   cluster: true,
-        //   clusterMaxZoom: 4,
-        //   clusterRadius: 10
-        });
-
-        //display on map 
-        map.addLayer({
-          id: "Music",
-          type: "circle",
-          source: "Music",
-          paint: {
-            "circle-radius": 8,
-            "circle-color": "green"
-          }
-        });
-
-    });
-
-    //add popup when Music Layer is clicked that displays name of venue and description 
-    map.on('click', 'Music', function(e) {
-
-var musicpop = e.features[0].properties.Name
-var musicpop_d = e.features[0].properties.Web_Notes
-
- new mapboxgl.Popup()
-.setLngLat(e.lngLat)
-.setHTML('<h3><strong>'+ musicpop + '<p>' + musicpop_d) //need to work on making description not bold 
-.addTo(map);
-});   
-
-
+      
+      
     //Add Neighborhoods Layer
 
     map.on("load", function() {
@@ -285,6 +201,120 @@ var musicpop_d = e.features[0].properties.Web_Notes
           }
         );
       });
+
+
+      
+      
+      
+      
+      
+      //Add breweries layer
+    map.on("load", function() {
+        map.addSource("Breweries", {
+          type: "geojson",
+          data: 'https://raw.githubusercontent.com/ninatrue/project/master/Breweries',
+        //   cluster: true,
+        //   clusterMaxZoom: 4,
+        //   clusterRadius: 10
+        });
+
+        //display on map 
+        map.addLayer({
+          id: "Breweries",
+          type: "symbol",
+          source: "Breweries",
+          layout: {
+            "icon-image": "beer-15"
+          }
+        //   paint: {
+        //     "circle-radius": 6,
+        //     "circle-color": "red"
+        //   }
+        });
+
+    });
+
+
+        //add popup when Music Layer is clicked that displays name of venue and description 
+        map.on('click', 'Breweries', function(e) {
+
+var brewpop = e.features[0].properties.name
+var brewpop_d = e.features[0].properties.field_4
+
+ new mapboxgl.Popup()
+.setLngLat(e.lngLat)
+.setHTML('<h3><strong>'+ brewpop + '<p>' + brewpop_d) //need to work on making description not bold 
+.addTo(map);
+});   
+
+      //Add farmers market's layer 
+    
+        var market_geo = 'https://raw.githubusercontent.com/ninatrue/project/master/Markets'
+
+      map.on("load", function() {
+        map.addSource("Markets", {
+          type: "geojson",
+          data: 'https://raw.githubusercontent.com/ninatrue/project/master/Markets',
+        //   cluster: true,
+        //   clusterMaxZoom: 4,
+        //   clusterRadius: 10
+        });
+
+        //display on map
+        map.addLayer({
+          id: "Markets",
+          type: "symbol",
+          source: "Markets",
+        layout: {
+            "icon-image": "garden-15"
+        }
+        //   paint: {
+        //     "circle-radius": 6,
+        //     "circle-color": "dodgerblue"
+        //   }
+        });
+
+    });
+
+
+    
+
+  
+//Add Music Venue Layer 
+
+map.on("load", function() {
+        map.addSource("Music", {
+          type: "geojson",
+          data: 'https://raw.githubusercontent.com/ninatrue/project/master/Music',
+        //   cluster: true,
+        //   clusterMaxZoom: 4,
+        //   clusterRadius: 10
+        });
+
+        //display on map 
+        map.addLayer({
+          id: "Music",
+          type: "symbol",
+          source: "Music",
+          layout: {
+            "icon-image": "music-15"
+        }
+        });
+
+    });
+
+    //add popup when Music Layer is clicked that displays name of venue and description 
+    map.on('click', 'Music', function(e) {
+
+var musicpop = e.features[0].properties.Name
+var musicpop_d = e.features[0].properties.Web_Notes
+
+ new mapboxgl.Popup()
+.setLngLat(e.lngLat)
+.setHTML('<h3><strong>'+ musicpop + '<p>' + musicpop_d) //need to work on making description not bold 
+.addTo(map);
+});   
+
 
 
 
@@ -367,6 +397,59 @@ var toggleableLayerIds = ['Breweries', 'Markets', 'Music'];
  var layers = document.getElementById('menu');
  layers.appendChild(link);
  }
+
+//Radius 
+ map.on('load', function () {
+      map.addLayer({
+        id: 'home-search',
+        source: {
+          type: 'geojson',
+          data: { "type": "FeatureCollection", "features": [] }
+        },
+        type: 'circle',
+        paint: {
+          'circle-color': 'green',
+          'circle-radius': 10,
+          'circle-opacity': 0.5
+        },
+      }, 'country-label');
+
+      // Draw the alien search radius on the map
+      map.addLayer({
+        id: 'search-radius',
+        source: {
+          type: 'geojson',
+          data: { "type": "FeatureCollection", "features": [] }
+        },
+        type: 'fill',
+        paint: {
+          'fill-color': '#555',
+          'fill-opacity': 0.1
+        }
+      }, 'country-label');
+    });
+
+    
+ 
+ 
+ 
+ // When the user clicks, find all of the points that fall within a given radius
+    // Add those points to the confirmed landing site.
+    map.on('click', function (e) {
+      // Store the click event's coordinate array as a variable.
+      var eventLngLat = [e.lngLat.lng, e.lngLat.lat];
+      // Use the makeRadius() function to generate the search radius as a GeoJSON polygon
+      var searchRadius = makeRadius(eventLngLat, 15000);
+      // Use the spatialJoin() function to find sites that fall within the search radius
+      // and have a property that matches the criteria for a confirmed site.
+      var featuresInBuffer = spatialJoin(geojson, searchRadius);
+
+      // Set the alien truth map source's data to our newly filtered set of features
+      map.getSource('home-search').setData(turf.featureCollection(featuresInBuffer));
+      // Draw the search radius on the map
+      map.getSource('search-radius').setData(searchRadius);
+    });
+
 
 
     </script>
