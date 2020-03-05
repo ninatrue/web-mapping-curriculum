@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Display a map</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.8.0/mapbox-gl.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@5/turf.min.js"></script>
+<!-- 🔰 Using a script tag, link to centroids data file, which lives in the same directory as this file and contains a variable called "centroids" you can reference in your map code -->
+<script src='./habitat.js'></script>
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+    </style>
+</head>
+<body>
+<div id="map"></div>
+
+
+</div>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiZGFuc3dpY2siLCJhIjoiY2swb2g4Z3hqMGFzYTNjbXdxc3F6dWZlaSJ9.Jo1SOIQUg0JV6HK4wEv36w';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v10',
+        center: [-122.454, 47.885],
+        zoom: 7
+    });
+
+    
+
+    
+    
+    // Inside your on('load', ...) callback: add a layer for the search radius, the parcel centroids, and the selected parcels.
+    map.on('load', function() {
+
+        
+        map.addLayer({
+        id: 'centroids',
+        source: {
+          type: 'geojson',
+          data: habitat 
+        },
+        type: 'fill',
+        paint: {
+          'fill-color': 'dodgerblue',
+          'fill-opacity': 0.5
+        },
+      }, 'country-label');
+
+    }); 
+
+
+
+
+
+
+
+       
+
+      
+</script>
+
+</body>
+</html>
