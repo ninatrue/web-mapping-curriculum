@@ -1,0 +1,527 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Austin House Hunting</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@5/turf.min.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <!-- Import jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Add mapbox gl geocoder plugin here -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css"
+      type="text/css"
+    />
+
+     <!-- Turf.js plugin -->
+     <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+
+
+    <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.2.0/mapbox-gl-geocoder.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.2.0/mapbox-gl-geocoder.css"
+      type="text/css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src='mapbox-gl-traffic.js'></script>
+
+    <style>
+     body {
+        color:#404040;
+        font:400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+        margin:0;
+        padding:0;
+        -webkit-font-smoothing:antialiased;
+      }
+
+      * {
+        -webkit-box-sizing:border-box;
+        -moz-box-sizing:border-box;
+        box-sizing:border-box;
+      }
+
+      .sidebar {
+        position:absolute;
+        width:30%;
+        height:100%;
+        top:0;left:0;
+        overflow:hidden;
+        border-right:1px solid rgba(0,0,0,0.25);
+      }
+
+      .heading {
+        background:#fff;
+        border-bottom:1px solid #eee;
+        min-height:60px;
+        line-height:60px;
+        padding:0 10px;
+        background-color: #00853e;
+        color: #fff;
+      }
+
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      
+    
+      }
+
+
+
+      /* Housing Prices Legend  */
+
+      .legend {
+        background-color: #fff;
+        border-radius: 3px;
+        bottom: 40px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+        padding: 10px;
+        position: absolute;
+        right: 10px;
+        z-index: 1;
+      }
+
+      .legend h4 {
+        margin: 0 0 10px;
+      }
+
+      .legend div span {
+        border-radius: 50%;
+        display: inline-block;
+        height: 10px;
+        margin-right: 5px;
+        width: 10px;
+      }
+      /* Hover over neighborhood overlay */
+
+      .map-overlay {
+        position: absolute;
+        top: 60px;
+        right: 0px;
+        background: rgba(255, 255, 255, 0.8);
+        margin-right: 10px;
+        font-family: "Helvetica Neue", Arial;
+        padding: 10px;
+        overflow: auto;
+        border-radius: 7px;
+      } 
+
+      #selectedLocations {
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    /* 🔰 set the background-color to white */
+    background: #fff;
+    padding: 10px 25px 25px 25px;
+    border-radius: 5px;
+    max-height: 600px;
+    overflow:scroll
+    /* 🔰 to avoid making a really long list that runs off the page, set overflow to scroll */
+  }
+
+
+
+
+
+    </style>
+
+    <nav id="menu"></nav>
+  </head>
+  <body>
+
+    <div class='sidebar'>
+        <div class='heading'>
+          <h1>Local Ammenities</h1>
+        </div>
+        <div id='listings' class='listings'></div>
+      </div>
+      <div id='map' class='map'> </div>
+
+    <div id="map"></div>
+
+    <!-- Housing Prices Legend -->
+    <div id="legend" class="legend">
+      <h4>Home Value</h4>
+      <div><span style="background-color: #723122"></span>$900,000</div>
+      <div><span style="background-color: #8B4225"></span>$800,000</div>
+      <div><span style="background-color: #A25626"></span>$700,000</div>
+      <div><span style="background-color: #B86B25"></span>$600,000</div>
+      <div><span style="background-color: #CA8323"></span>$500,000</div>
+      <div><span style="background-color: #DA9C20"></span>$400,000</div>
+      <div><span style="background-color: #E6B71E"></span>$350,000</div>
+      <div><span style="background-color: #EED322"></span>$300,000</div>
+      <div><span style="background-color: #F2F12D"></span>$200,000</div>
+    </div>
+
+    <div class="map-overlay" id="features">
+      <h2>Estimated Home Value</h2>
+      <div id="hv"><p>Hover over a neighborhood</p></div>
+    </div>
+
+   <!-- 
+    <div id="selectedLocations"> -->
+        <!-- 🔰 Create a heading that says "Selected locations:" -->
+      <!-- 
+          <h2>Selected locations:</h2>
+          <div id="bulletsContainer"></div>
+        </div>
+      
+      </div> -->
+
+    <script>
+      // Initialize the map--------------------------------------------------------------------------------------------------------------
+      mapboxgl.accessToken = 'pk.eyJ1IjoibnRydXNzbyIsImEiOiJjazVoYTN3N24wMW5zM3BsaXFnZHRwM2ZhIn0.mPlZAtnjwvpYSr8mFys2hQ'
+        ;
+      var map = new mapboxgl.Map({
+        container: "map", // container id
+        style: "mapbox://styles/ntrusso/ck6vk72ez02dr1ippv9r225q4/draft", // stylesheet location
+        center: [-97.722, 30.299], // starting position [lng, lat]
+        zoom: 11 // starting zoom
+      });
+
+ //Add Layers ------------------------------------------------------------------------------------------------------------------------------------------
+
+      //add geojsons
+
+      var neighborhood_geo =
+        "https://raw.githubusercontent.com/ninatrue/project/master/updated_neighborhoods1";
+      var brew_geo =
+        "https://raw.githubusercontent.com/ninatrue/project/master/Breweries";
+      var market_geo =
+        "https://raw.githubusercontent.com/ninatrue/project/master/Markets";
+      var music_geo =
+        "https://raw.githubusercontent.com/ninatrue/project/master/Music";
+
+       //Load Layers 
+
+       map.on("load", function() {
+
+        map.addSource("Neighborhoods", {   //Add neighborhoods 
+          type: "geojson",
+          data: neighborhood_geo
+        })
+        
+        map.addSource("Breweries", {
+          type: "geojson",
+          data: brew_geo
+        });
+        
+        map.addSource("Markets", {   //Add Markets 
+          type: "geojson",
+          data: market_geo
+        });
+
+        map.addSource("Music", { //Add Music Venues 
+          type: "geojson",
+          data: music_geo
+        });
+
+    //     var geocoder = new MapboxGeocoder({  //Add search bar 
+    //       accessToken: mapboxgl.accessToken, // Set the access token
+    //       mapboxgl: mapboxgl, // Set the mapbox-gl instance
+    //       zoom: 15, // Set the zoom level for geocoding results
+    //       placeholder: "Search addresses in Austin" // This placeholder text will display in the search bar
+    //     }); 
+
+    //     map.addControl(geocoder, "top-right"); // Add the search box to the top right
+
+    // geocoder.on('result', function(e) {
+    //   var clickedLngLat = [e.lngLat.lng, e.lngLat.lat];
+    //   marker.setLngLat(clickedLngLat).addTo(map);
+    //   var searchRadius = makeRadius(clickedLngLat, 5);
+    //   //var featuresInBuffer = spatialJoin(centroids, searchRadius);
+    //   map.getSource('search-radius').setData(searchRadius);
+    //   var selectedpoints = pip(Breweries, searchRadius);
+    //   map.getSource('centroids-selected').setData(selectedpoints);
+    //   buildLocationsList(selectedpoints, 'bulletsContainer')
+     
+    // });
+
+
+        map.addLayer({
+          id: "Neighborhoods",  //Neighborhoods 
+          type: "fill",
+          source: "Neighborhoods",
+          maxzoom: 15,
+          //create a chloropleth map based on 2019 estimated home value
+          paint: {
+            "fill-color": [
+              "interpolate",
+              ["linear"],
+              ["get", "HousingPri"],
+              0,
+              "#F2F12D",
+              300000,
+              "#EED322",
+              350000,
+              "#E6B71E",
+              400000,
+              "#DA9C20",
+              500000,
+              "#CA8323",
+              600000,
+              "#B86B25",
+              700000,
+              "#A25626",
+              800000,
+              "#8B4225",
+              900000,
+              "#723122"
+            ],
+            "fill-opacity": 0.4
+          }
+        }, 'country-label'); 
+
+
+        map.addLayer({ //Breweries 
+          id: "Breweries",
+          type: "symbol",
+          source: "Breweries",
+          layout: {
+            "icon-image": "beer-15"
+          }
+        });
+
+        map.addLayer({ //Markets 
+          id: "Markets",
+          type: "symbol",
+          source: "Markets",
+          layout: {
+            "icon-image": "garden-15"
+          }
+        });
+
+        map.addLayer({
+          id: "Music",
+          type: "symbol",
+          source: "Music",
+          layout: {
+            "icon-image": "music-15"
+          }
+        });
+
+        map.addLayer({
+        id: 'search-radius',
+        source: {
+          type: 'geojson',
+          data: { "type": "FeatureCollection", "features": [] }
+        },
+        type: 'fill',
+        paint: {
+          'fill-color': '#555',
+          'fill-opacity': 0.1
+        }, 
+      }, 'country-label');
+
+      map.addLayer({
+        id: 'centroids-selected',
+        source: {
+          type: 'geojson',
+          data: { "type": "FeatureCollection", "features": [] }
+        },
+        type: 'fill',
+        type: 'circle',
+        paint: {
+          'circle-color': 'dodgerblue',
+          'circle-radius': 2,
+          'circle-opacity': 0.5
+        },
+    });
+
+
+    
+
+    
+
+       });
+
+
+               var geocoder = new MapboxGeocoder({  //Add search bar 
+          accessToken: mapboxgl.accessToken, // Set the access token
+          mapboxgl: mapboxgl, // Set the mapbox-gl instance
+          zoom: 15, // Set the zoom level for geocoding results
+          placeholder: "Search addresses in Austin" // This placeholder text will display in the search bar
+        }); 
+
+        map.addControl(geocoder, "top-right"); // Add the search box to the top right
+
+    geocoder.on('result', function(e) {
+      var clickedLngLat = [e];
+      marker.setLngLat(clickedLngLat).addTo(map);
+      var searchRadius = makeRadius(clickedLngLat, 5);
+      //var featuresInBuffer = spatialJoin(centroids, searchRadius);
+      map.getSource('search-radius').setData(searchRadius);
+      var selectedpoints = pip(Breweries, searchRadius);
+      map.getSource('centroids-selected').setData(selectedpoints);
+      buildLocationsList(selectedpoints, 'bulletsContainer')
+     
+    });
+
+
+
+
+
+
+
+//Popups ------------------------------------------------------------------------------------------------------------
+ //add popup when brewery Layer is clicked that displays name of venue and description
+      map.on("click", "Breweries", function(e) {
+        var brewpop = e.features[0].properties.Name;
+        var brewpop_d = e.features[0].properties.address;
+
+        new mapboxgl.Popup()
+          .setLngLat(e.lngLat)
+          .setHTML("<h4>" + brewpop + "<h5>" + brewpop_d) //need to work on making description not bold
+          .addTo(map);
+      });
+
+      //add popup when Music Layer is clicked that displays name of venue and description
+      map.on("click", "Music", function(e) {
+        var musicpop = e.features[0].properties.Name;
+        var musicpop_d = e.features[0].properties.Web_Notes;
+
+        new mapboxgl.Popup()
+          .setLngLat(e.lngLat)
+          .setHTML("<h4>" + musicpop + "<h5>" + musicpop_d) //need to work on making description not bold
+          .addTo(map);
+      });
+
+
+      //add popup when Farmer's Market is clicked that displays name of market and website 
+      map.on("click", "Markets", function(e) {
+        var marketpop = e.features[0].properties.Name;
+        var marketpop_d = e.features[0].properties.Website;
+
+        new mapboxgl.Popup()
+          .setLngLat(e.lngLat)
+          .setHTML("<h4>" + marketpop + "<h5>" + marketpop_d) 
+          .addTo(map);
+      });
+
+
+      //Add hover effect -------------------------------------------------------------------------------------------------------------------------------------
+      map.on("mousemove", function(e) {
+        var prices = map.queryRenderedFeatures(e.point, {
+          layers: ["Neighborhoods"]
+        });
+
+        if (prices.length > 0) {
+          document.getElementById("hv").innerHTML =
+            "<h3><strong>" +
+            prices[0].properties.name +
+            "</strong></h3><p><strong><em>" +
+            prices[0].properties.HousingPri +
+            "</strong> Home Value </em></p>";
+        } else {
+          document.getElementById("hv").innerHTML =
+            "<p>Hover over a neighborhood</p>";
+        }
+      });
+
+
+      //test-------------------------------------- 
+
+    //   geocoder.on('result', function(e) {
+    //   var clickedLngLat = [e.lngLat.lng, e.lngLat.lat];
+    //   marker.setLngLat(clickedLngLat).addTo(map);
+    //   var searchRadius = makeRadius(clickedLngLat, 5);
+    //   //var featuresInBuffer = spatialJoin(centroids, searchRadius);
+    //   map.getSource('search-radius').setData(searchRadius);
+    //   var selectedpoints = pip(Breweries, searchRadius);
+    //   map.getSource('centroids-selected').setData(selectedpoints);
+    //   buildLocationsList(selectedpoints, 'bulletsContainer')
+     
+    // });
+
+    /****** UTILITY FUNCTIONS *******/
+
+    function makeRadius(lngLatArray, radiusInMeters) {
+
+var point = turf.point(lngLatArray);
+
+var buffered = turf.buffer(point, radiusInMeters, { units: 'miles' });
+
+return buffered;
+}
+
+function pip(pointsFeatureCollection, polygon) {
+        var selectedpoints = turf.pointsWithinPolygon(pointsFeatureCollection, polygon) 
+        return selectedpoints 
+    }
+
+    function buildLocationsList(selectedPoints, containerId) {
+          var listContainer = document.getElementById('bulletsContainer');
+      
+      var pointBullets = selectedPoints.features.map(function(point) {
+            return "<li>Name: " + point.properties.Name + ' ' + point.properties.address + "</li>";
+        }); 
+   
+      var bulletsList = '<h3> Breweries </h3> <ul>' + pointBullets.join('') +'</ul>'
+
+      listContainer.innerHTML = bulletsList;
+
+    
+    }
+
+//make legend disappear after search ------------------------------------------------------------------------------------------------
+
+///selectedLocations
+
+
+var legendEl = document.getElementById('legend');
+var featuresEl = document.getElementById('features');
+var locationsEl = document.getElementById('selectedLocations');
+
+map.on('zoom', function() {
+
+
+if (map.getZoom() >= 15) {
+legendEl.style.display = 'none';
+featuresEl.style.display = 'none'
+locationsEl.style.display = 'block';
+} else {
+legendEl.style.display = 'block';
+featuresEl.style.display = 'block';
+locationsEl.style.display = 'none'
+}
+
+if (map.getZoom() < 12) {              //how to not get selected locations on load 
+locationsEl.style.display = 'none';
+} else {
+locationsEl.style.display = 'block' 
+}
+
+
+
+});
+
+
+
+
+
+
+    </script>
+  </body>
+</html>
+
