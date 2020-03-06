@@ -29,7 +29,7 @@ CORS and working with external data
 
 In your own words, describe why web map developers have to think about CORS.
 
-You have to think about CORS because some things might be private or scary and not everyone will have access to it. 
+You have to think about CORS because some things might be private or scary and not everyone will have access to it. CORS keeps computer's safe. 
 
 What is the concept of "separation of concerns?"
 
